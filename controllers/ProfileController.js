@@ -18,7 +18,7 @@ module.exports = {
     })
   },
 
-  findByID: function(id) {
+  findById: function(id) {
     return new Promise(function(resolve, reject) {
 
       Profile.findById(id, function(err, profile) {
