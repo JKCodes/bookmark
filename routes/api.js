@@ -56,7 +56,7 @@ router.get('/:resource/:id', function(req, res, next) {
   .catch(function(err) {
     res.json({
       confirmation: 'fail',
-      message: err
+      message: `${resource} ${id} not found`
     })
   })
 })
