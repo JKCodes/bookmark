@@ -17,6 +17,22 @@ class Signup extends Component {
     }
   }
 
+  componentDidMount() {
+    // check if logged in
+    APIManager.get('/account/currentuser', null, (err, response) => {
+      if (err) {
+        alert(err)
+        return
+      }
+
+      if (response.profile == null)
+        return
+
+      console.log(JSON.stringify(response.profile))
+      this.props.currentUserReceived(response.profile)
+    })
+  }
+
   updateVisitor(event) {
     let updated = Object.assign({}, this.state.visitor)
     updated[event.target.id] = event.target.value
@@ -41,17 +57,18 @@ class Signup extends Component {
   }
 
   render() {
-    const greeting = (this.props.currentUser == null) ? null : <h2>Welcome {this.props.currentUser.firstName}</h2>
-
     return (
       <div>
-        { greeting }
-        <h2>Sign Up</h2>
-        <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="First Name" id="firstName" /><br />
-        <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="Last Name" id="lastName" /><br />
-        <input onChange={this.updateVisitor.bind(this)}type="email" placeholder="Email" id="email" /><br />
-        <input onChange={this.updateVisitor.bind(this)}type="password" placeholder="Password" id="password" /><br />
-        <button onClick={this.register.bind(this)}>Join</button>
+        {(this.props.currentUser != null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> :
+            <div>
+              <h2>Sign Up</h2>
+              <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="First Name" id="firstName" /><br />
+              <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="Last Name" id="lastName" /><br />
+              <input onChange={this.updateVisitor.bind(this)}type="email" placeholder="Email" id="email" /><br />
+              <input onChange={this.updateVisitor.bind(this)}type="password" placeholder="Password" id="password" /><br />
+              <button onClick={this.register.bind(this)}>Join</button>
+            </div>
+        }
       </div>
     )
   }
@@ -65,7 +82,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    profileCreated: (profile) => dispatch(actions.profileCreated(profile))
+    profileCreated: (profile) => dispatch(actions.profileCreated(profile)),
+    currentUserReceived: (profile) => dispatch(actions.currentUserReceived(profile))
   }
 }
 
