@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { APIManager } from '../../utils'
+import actions from '../../actions'
+import { connect } from 'react-redux'
 
 class Profiles extends Component {
   
@@ -13,14 +15,13 @@ class Profiles extends Component {
   componentDidMount() {
     APIManager.get('/api/profile', null, (err, response) => {
       const results = response.results
-      this.setState({
-        profiles: results
-      })
+
+      this.props.profilesReceived(results)
     })
   }
 
   render() {
-    const list = this.state.profiles.map((profile, i) => {
+    const list = this.props.profiles.map((profile, i) => {
       return (
         <li key={profile.id}>{ profile.firstName }</li>
       )
@@ -37,4 +38,16 @@ class Profiles extends Component {
   }
 }
 
-export default Profiles
+const stateToProps = (state) => {
+  return {
+    profiles: state.profile.list
+  }
+}
+
+const dispatchToProps = (dispatch) => {
+  return {
+    profilesReceived: (profiles) => dispatch(actions.profilesReceived(profiles))
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Profiles)
