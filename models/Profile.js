@@ -14,6 +14,7 @@ ProfileSchema.methods.summary = function() {
     firstName: this.firstName,
     lastName: this.lastName,
     email: this.email,
+    timestamp: this.timestamp
   }
 
   return summary
