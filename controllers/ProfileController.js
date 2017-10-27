@@ -1,5 +1,6 @@
 var Profile = require('../models/Profile')
 var Promise = require('bluebird')
+var bcrypt = require('bcryptjs')
 
 module.exports = {
 
@@ -34,6 +35,9 @@ module.exports = {
 
   create: function(params) {
     return new Promise(function(resolve, reject) {
+
+      var password = params.password
+      params['password'] = bcrypt.hashSync(password, 10)
 
       Profile.create(params, function(err, profile) {
         if (err) {
