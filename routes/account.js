@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var controllers = require('../controllers')
 var bcrypt = require('bcryptjs')
+var utils = require('../utils')
 
 router.post('/login', function(req, res, next) {
 
@@ -29,9 +30,12 @@ router.post('/login', function(req, res, next) {
       return
     }
 
+    var token = utils.JWT.sign({id: profile.id}, process.env.TOKEN_SECRET)
+
     res.json({
       confirmation: 'success',
-      profile: profile.summary()
+      profile: profile.summary(),
+      token: token
     })
   })
   .catch(function(err) {
