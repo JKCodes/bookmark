@@ -43,7 +43,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <h2>Signup</h2>
+        <h2>Sign Up</h2>
         <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="First Name" id="firstName" /><br />
         <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="Last Name" id="lastName" /><br />
         <input onChange={this.updateVisitor.bind(this)}type="email" placeholder="Email" id="email" /><br />
@@ -56,7 +56,7 @@ class Signup extends Component {
 
 const stateToProps = (state) => {
   return {
-
+    currentUser: state.account.currentUser
   }
 }
 
