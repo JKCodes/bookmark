@@ -7,14 +7,14 @@ module.exports = {
   },
   output: {
     filename: 'public/dist/bundle.js',
-    sourceMapFilename: 'public/dist/bundle.js'
+    sourceMapFilename: 'public/dist/bundle.map'
   },
   devtool: '#source-map',
   module: {
     loaders: [
       {
         loader: 'babel-loader',
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules)/,
         query: {
           presets: ['react', 'es2015']
