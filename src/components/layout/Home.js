@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Profiles } from '../containers'
 
 class Home extends Component {
   render() {
     return (
       <div className="row">
         <div className="col-sm-3" style={{background:'#f9f9f9'}}>
-          Left
+          <Profiles />
         </div>
 
         <div className="col-sm-6">
