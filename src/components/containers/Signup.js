@@ -41,8 +41,11 @@ class Signup extends Component {
   }
 
   render() {
+    const greeting = (this.props.currentUser == null) ? null : <h2>Welcome {this.props.currentUser.firstName}</h2>
+
     return (
       <div>
+        { greeting }
         <h2>Sign Up</h2>
         <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="First Name" id="firstName" /><br />
         <input onChange={this.updateVisitor.bind(this)}type="text" placeholder="Last Name" id="lastName" /><br />
