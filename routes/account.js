@@ -46,6 +46,30 @@ router.get('/:action', function(req, res, next) {
   }
 })
 
+router.post('/register', function(req, res, next) {
+  var credentials = req.body
+
+  controllers.profile
+  .create(credentials)
+  .then(function(profile) {
+
+    var token = utils.JWT.sign({id: profile.id}, process.env.TOKEN_SECRET)
+    req.session.token = token
+
+    res.json({
+      confirmation: 'success',
+      profile: profile,
+      token: token
+    })
+  })
+  .catch(function(err) {
+    res.json({
+      confirmation: 'fail',
+      message: err.message || err
+    })
+  })
+})
+
 router.post('/login', function(req, res, next) {
   var credentials = req.body
 
