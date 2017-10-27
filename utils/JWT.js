@@ -4,7 +4,7 @@ var Promise = require('bluebird')
 module.exports = {
 
   sign: function(obj, secret) {
-    return jwt.sign(obje, secret) // returns token
+    return jwt.sign(obj, secret) // returns token
   },
 
   verify: function(token, secret) {
