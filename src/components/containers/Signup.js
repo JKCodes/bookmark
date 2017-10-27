@@ -28,7 +28,7 @@ class Signup extends Component {
   register(event) {
     event.preventDefault()
 
-    APIManager.post('/api/profile', this.state.visitor, (err, response) => {
+    APIManager.post('/account/register', this.state.visitor, (err, response) => {
       if (err) {
         let msg = err.message || err
         alert(msg)
@@ -36,7 +36,7 @@ class Signup extends Component {
         return
       }
 
-      this.props.profileCreated(response.result)
+      this.props.profileCreated(response.profile)
     })
   }
 
