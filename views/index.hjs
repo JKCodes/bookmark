@@ -3,27 +3,9 @@
   <head>
     <title>{{ title }}</title>
   </head>
-  <body style="padding:24px">
-    <h1>Create Profile</h1>
-    <form action="/api/profile" method="post">
-      <input type="text" name="firstName" placeholder="First Name"><br />
-      <input type="text" name="lastName" placeholder="Last Name"><br />
-      <input type="email" name="email" placeholder="Email"><br />
-      <input type="password" name="password" placeholder="Password"><br />
-      <input type="submit" value="Submit" />
-    </form>
+  <body>
+    <div id="root"></div>
 
-    <h1>Login</h1>
-    <form action="/account/login" method="post">
-      <input type="email" name="email" placeholder="Email"><br />
-      <input type="password" name="password" placeholder="Password"><br />
-      <input type="submit" value="Submit" />
-    </form>
-
-    <h1>Create Bookmark</h1>
-    <form action="/api/bookmark" method="post">
-      <input type="text" name="url" placeholder="Url"><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <script type="text/javascript" src="/dist/bundle.js"></script>
   </body>
 </html>
