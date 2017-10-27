@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { APIManager } from '../../utils'
+import actions from '../../actions'
+import { connect } from 'react-redux'
 
 class Signup extends Component {
 
@@ -34,7 +36,7 @@ class Signup extends Component {
         return
       }
 
-      console.log(JSON.stringify(response))
+      this.props.profileCreated(response.result)
     })
   }
 
@@ -52,4 +54,16 @@ class Signup extends Component {
   }
 }
 
-export default Signup
+const stateToProps = (state) => {
+  return {
+
+  }
+}
+
+const dispatchToProps = (dispatch) => {
+  return {
+    profileCreated: (profile) => dispatch(actions.profileCreated(profile))
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Signup)
