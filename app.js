@@ -9,7 +9,6 @@ require('dotenv').config()
 
 var index = require('./routes/index')
 var api = require('./routes/api')
-var scrape = require('./routes/scrape')
 
 mongoose.connect(process.env.DB_URL, function(err, res) {
   if (err) {
@@ -35,7 +34,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
 app.use('/api', api)
-app.use('/scrape', scrape)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

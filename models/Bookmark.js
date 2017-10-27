@@ -1,4 +1,6 @@
 var mongoose = require('mongoose')
+var superagent = require('superagent')
+var utils = require('../utils')
 
 var BookmarkSchema = new mongoose.Schema({
   profile : {type:String, default:''},
