@@ -7,7 +7,7 @@ router.post('/login', function(req, res, next) {
   var credentials = req.body
 
   controllers.profile
-  .find({email: credentials.email})
+  .find({email: credentials.email}, true)
   .then(function(profiles) {
     if (profiles.length == 0) {
       res.json({
