@@ -4,8 +4,42 @@ var controllers = require('../controllers')
 var bcrypt = require('bcryptjs')
 var utils = require('../utils')
 
-router.post('/login', function(req, res, next) {
+router.get('/:action', function(req, res, next) {
+  var action = req.params.action
 
+  if(action == 'currentuser') { // check for a current user
+    if (req.session == null || req.session.token == null) {
+      res.json({
+        confirmation: 'success',
+        message: 'User not logged in.'
+      })
+
+      return
+    }
+
+    var token = req.session.token
+    utils.JWT.verify(token, process.env.TOKEN_SECRET)
+    .then(function(decode) {
+      return controllers.profile.findById(decode.id)
+    })
+    .then(function(profile) {
+      res.json({
+        confirmation: 'success',
+        profile: profile
+      })
+    })
+    .catch(function(err) {
+      res.json({
+        confirmation: 'fail',
+        message: 'Invalid Token'
+      })
+
+      return
+    })
+  }
+})
+
+router.post('/login', function(req, res, next) {
   var credentials = req.body
 
   controllers.profile
@@ -31,6 +65,7 @@ router.post('/login', function(req, res, next) {
     }
 
     var token = utils.JWT.sign({id: profile.id}, process.env.TOKEN_SECRET)
+    req.session.token = token
 
     res.json({
       confirmation: 'success',
