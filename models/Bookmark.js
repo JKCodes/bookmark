@@ -13,7 +13,7 @@ var BookmarkSchema = new mongoose.Schema({
 
 BookmarkSchema.methods.summary = function() {
   var summary = {
-    id: this._id,
+    id: `${this._id}`,
     profile: this.profile,
     url: this.url,
     description: this.description,
