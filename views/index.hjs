@@ -13,6 +13,13 @@
       <input type="submit" value="Submit" />
     </form>
 
+    <h1>Login</h1>
+    <form action="/account/login" method="post">
+      <input type="email" name="email" placeholder="Email"><br />
+      <input type="password" name="password" placeholder="Password"><br />
+      <input type="submit" value="Submit" />
+    </form>
+
     <h1>Create Bookmark</h1>
     <form action="/api/bookmark" method="post">
       <input type="text" name="url" placeholder="Url"><br />
