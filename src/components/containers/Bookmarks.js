@@ -14,6 +14,9 @@ class Bookmarks extends Component {
 
   componentDidUpdate() {
     console.log(JSON.stringify(this.props.selected))
+    const list = this.props.bookmarks[this.props.selected.id]
+    if (list != null)
+      return
 
     const params = {profile: this.props.selected.id}
     APIManager.get('api/bookmark', params, (err, response) => {
