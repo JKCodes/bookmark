@@ -21,13 +21,38 @@ componentDidMount() {
     })
   }
 
+  register(visitor) {
+    APIManager.post('/account/register', visitor, (err, response) => {
+      if (err) {
+        let msg = err.message || err
+        alert(msg)
+      
+        return
+      }
+
+      this.props.profileCreated(response.profile)
+    })
+  }
+
+  login(credentials) {
+    APIManager.post('/account/login', credentials, (err, response) => {
+      if (err) {
+        let msg = err.message || err
+        alert(msg)
+      
+        return
+      }
+      this.props.currentUserReceived(response.profile)
+    })
+  }
+
   render() {
     return (
 
       <div>
         {(this.props.currentUser != null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> :
             <div>
-              <Signup />
+              <Signup onLogin={this.login.bind(this)} />
             </div>
         }
       </div>
