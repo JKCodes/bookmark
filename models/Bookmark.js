@@ -16,6 +16,7 @@ BookmarkSchema.methods.summary = function() {
     id: `${this._id}`,
     profile: this.profile,
     url: this.url,
+    title: this.title,
     description: this.description,
     image: this.image,
     timestamp: this.timestamp
