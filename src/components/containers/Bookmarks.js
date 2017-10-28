@@ -8,7 +8,7 @@ class Bookmarks extends Component {
   constructor() {
     super()
     this.state = {
-      bookmarks: []
+
     }
   }
 
@@ -29,7 +29,7 @@ class Bookmarks extends Component {
         <h2>Bookmarks</h2>
         <ol>
           {
-            this.state.bookmarks.map((bookmark, i) => {
+            this.props.bookmarks.map((bookmark, i) => {
               return (
                 <li key={bookmark.id}>{bookmark.title}</li>
               )
@@ -43,7 +43,7 @@ class Bookmarks extends Component {
 
 const stateToProps = (state) => {
   return {
-    bookmarks: state.bookmark
+    bookmarks: state.bookmark.all
   }
 }
 
