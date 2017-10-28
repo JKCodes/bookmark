@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Profiles, Signup } from '../containers'
+import { Profiles, Signup, Admin } from '../containers'
 
 class Home extends Component {
   render() {
@@ -14,7 +14,7 @@ class Home extends Component {
         </div>
 
         <div className="col-sm-3" style={{background:'#f9f9f9'}}>
-          <Signup />
+          <Admin />
         </div>
       </div>
     )
