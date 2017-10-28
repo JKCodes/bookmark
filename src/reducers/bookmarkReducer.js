@@ -1,7 +1,7 @@
 import constants from '../constants'
 
 var initialState = {
-  all: []
+
 }
 
 export default (state = initialState, action) => {
@@ -11,7 +11,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case constants.BOOKMARKS_RECEIVED:
-      updated['all'] = action.bookmarks
+      const params = action.params
+      const keys = Object.keys(params)
+      keys.forEach((key, i) => {
+        let value = params[key] // profile ID
+        updated[value] = action.bookmarks
+      })
       return updated
 
 
