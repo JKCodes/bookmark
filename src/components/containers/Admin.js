@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import actions from '../../actions'
 import { connect } from 'react-redux'
 import { APIManager } from '../../utils'
+import { Signup } from '../presentation'
 
 class Admin extends Component {
 
@@ -26,7 +27,7 @@ componentDidMount() {
       <div>
         {(this.props.currentUser != null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> :
             <div>
-              Not Logged In
+              <Signup />
             </div>
         }
       </div>
