@@ -24,6 +24,7 @@ class Signup extends Component {
 
   register(event) {
     event.preventDefault()
+    this.props.onRegister(this.state.visitor)
   }
 
   login(event) {

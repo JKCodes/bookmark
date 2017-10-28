@@ -52,7 +52,7 @@ componentDidMount() {
       <div>
         {(this.props.currentUser != null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> :
             <div>
-              <Signup onLogin={this.login.bind(this)} />
+              <Signup onLogin={this.login.bind(this)} onRegister={this.register.bind(this)} />
             </div>
         }
       </div>
