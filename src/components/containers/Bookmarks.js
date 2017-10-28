@@ -19,9 +19,7 @@ class Bookmarks extends Component {
         return
       }
 
-      this.setState({
-        bookmarks: response.results
-      })
+      this.props.bookmarksReceived(response.results)
     })
   }
 
@@ -43,4 +41,16 @@ class Bookmarks extends Component {
   }
 }
 
-export default Bookmarks
+const stateToProps = (state) => {
+  return {
+    bookmarks: state.bookmark
+  }
+}
+
+const dipatchToProps = (dispatch) => {
+  return {
+    bookmarksReceived: (bookmarks) => dispatch(actions.bookmarksReceived(bookmarks))
+  }
+}
+
+export default connect(stateToProps, dipatchToProps)(Bookmarks)
