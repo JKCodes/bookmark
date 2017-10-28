@@ -6,7 +6,14 @@ import { Signup } from '../presentation'
 
 class Admin extends Component {
 
-componentDidMount() {
+  constructor() {
+    super()
+    this.state = {
+      link: ''
+    }
+  }
+
+  componentDidMount() {
     // check if logged in
     APIManager.get('/account/currentuser', null, (err, response) => {
       if (err) {
@@ -46,14 +53,41 @@ componentDidMount() {
     })
   }
 
+  updateLink(event) {
+    this.setState({
+      link: event.target.value
+    })
+  }
+
+  submitLink(event) {
+    event.preventDefault()
+
+    const bookmark = {
+      profile: this.props.currentUser.id,
+      url: this.state.link
+    }
+
+    APIManager.post('/api/bookmark', bookmark, (err, response) => {
+      if (err) {
+        alert(err)
+        return
+      }
+
+      console.log(JSON.stringify(response))
+    })  
+  }
+
   render() {
     return (
 
       <div>
-        {(this.props.currentUser != null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> :
-            <div>
-              <Signup onLogin={this.login.bind(this)} onRegister={this.register.bind(this)} />
-            </div>
+        {(this.props.currentUser == null) ? <Signup onLogin={this.login.bind(this)} onRegister={this.register.bind(this)} /> :
+
+          <div>
+            <h2>Welcome {this.props.currentUser.firstName}</h2>
+            <input onChange={this.updateLink.bind(this)} type="text" placeholder="http://www.example.com"/><br />
+            <button onClick={this.submitLink.bind(this)} >Submit Link</button>
+          </div>
         }
       </div>
     )
