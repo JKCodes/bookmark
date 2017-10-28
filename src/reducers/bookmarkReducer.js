@@ -19,6 +19,11 @@ export default (state = initialState, action) => {
       })
       return updated
 
+    case constants.BOOKMARK_CREATED:
+      let list = (updated[action.bookmark.profile]) ? updated[action.bookmark.profile] : []
+      list.push(action.bookmark)
+      updated[action.bookmark.profile] = list
+      return updated
 
     default:
       return state
