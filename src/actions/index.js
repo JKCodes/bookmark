@@ -28,6 +28,13 @@ export default {
       type: constants.BOOKMARKS_RECEIVED,
       bookmarks: bookmarks
     }
+  },
+
+  profileSelected: (profile) => {
+    return {
+      type: constants.PROFILE_SELECTED,
+      profile: profile
+    }
   }
 
 }
